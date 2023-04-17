@@ -18,21 +18,23 @@
   <meta name="author" content="Oath">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="数组 array.size()  &amp;有2种用法：1.取值2.引用，对于引用这个用法就是同一个地址取不同的变量名字（叫不同的名字），改变引用变量，原变量也随之改变。 *也有两种用途：1.声明2.间接引用 1234int &amp;i &#x3D; j;#引用int i &#x3D; &amp;j;#取值int *i &#x3D; &amp;j;#声明指针*i &#x3D; j;#间接引用，根据地址索引变量。  函数传递变量三种，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2023/03/23/hello-world/index.html">
+<meta property="og:title" content="c++_syntax">
+<meta property="og:url" content="http://example.com/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="菜鸡技术学习历程">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="数组 array.size()  &amp;有2种用法：1.取值2.引用，对于引用这个用法就是同一个地址取不同的变量名字（叫不同的名字），改变引用变量，原变量也随之改变。 *也有两种用途：1.声明2.间接引用 1234int &amp;i &#x3D; j;#引用int i &#x3D; &amp;j;#取值int *i &#x3D; &amp;j;#声明指针*i &#x3D; j;#间接引用，根据地址索引变量。  函数传递变量三种，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-23T06:55:13.823Z">
-<meta property="article:modified_time" content="2023-03-23T06:55:13.823Z">
+<meta property="og:image" content="http://example.com/images/image-20230410155416133.png">
+<meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-17T07:45:47.245Z">
 <meta property="article:author" content="Oath">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images/image-20230410155416133.png">
   
   
   
-  <title>Hello World - 菜鸡技术学习历程</title>
+  <title>c++_syntax - 菜鸡技术学习历程</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="c++_syntax"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-23 14:55" pubdate>
-          2023年3月23日 下午
+        <time datetime="2023-04-17 00:00" pubdate>
+          2023年4月17日 凌晨
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          2.9k 字
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          4 分钟
+          24 分钟
         
       </span>
     
@@ -270,24 +272,104 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">c++_syntax</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <ol>
+<li><p>数组 array.size()</p>
+</li>
+<li><p>&amp;有2种用法：1.取值2.引用，对于引用这个用法就是同一个地址取不同的变量名字（叫不同的名字），改变引用变量，原变量也随之改变。</p>
+<p>*也有两种用途：1.声明2.间接引用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> &amp;i = j;#引用<br><span class="hljs-type">int</span> i = &amp;j;#取值<br><span class="hljs-type">int</span> *i = &amp;j;#声明指针<br>*i = j;#间接引用，根据地址索引变量。<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>函数传递变量三种，<strong>值传递，地址传递，引用传递</strong>。</p>
+</li>
+<li><p><strong>Extern关键字不能放在函数里面，要放在全局变量的位置</strong>。确定变量可以使用其他cpp文件声明的变量，extern可以置于变量或者函数前，以表示变量或者函数的定义在别的文件中，可以这么理解，<em>extern</em> 是用来在另一个文件中声明一个全局变量或函数。<strong>另外，extern也可用来进行链接指定。 有点类似python中的import可以自动寻找同一工程下面同名函数。</strong>一个变量被使用，要被定义(定义的同时声明了)，extern声明并不分配空间。 </p>
+</li>
+<li><p>指针和引用的区别：（1）指针不用初始化值，引用声明的时候需要指定绑定的变量。</p>
+<p>右值引用： int &amp;&amp;a &#x3D; 1；目的是为了优化空间（减少复制次数，增加临时变量存活周期）</p>
+<p>常量左值引用：const int &amp;a &#x3D; 1；（缺点只能是常量）</p>
+</li>
+<li><p>类型别名：auto不知道返回值类型，自动声明。</p>
+</li>
+<li><p>不要在头文件中使用using，std是一个标准的作用域。</p>
+</li>
+<li><p>在c++中一般就用string 去表示字符串，等价于char *。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;abc&quot;</span><span class="hljs-meta">#str放的是<span class="hljs-string">&quot;abc&quot;</span>的首位置，*str = <span class="hljs-string">&quot;a&quot;</span></span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>函数重载，<strong>相同的函数名</strong>。</p>
+<p>(1)函数名称必须相同。 </p>
+<p>(2)参数列表必须不同（个数不同、类型不同、参数排列顺序不同等）。</p>
+<p>(3)函数的返回类型可以相同也可以不相同。 </p>
+<p>(4)仅仅返回类型不同不足以成为函数的重载。</p>
+</li>
+<li><p>函数指针可以实现函数的回调，做的事情就是：在一个函数中，不改变其他执行语句，通过函数指针指向不同的函数，从而执行不同的函数。（当然也可以通过输入字符串匹配进行选择，感觉不够高效）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41475825/article/details/105966064">(16条消息) 回调函数和普通调用函数_大龙哥。的博客-CSDN博客_回调函数和直接调用函数</a></p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs glsl"><span class="hljs-type">int</span> (* p)(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>) = &amp; <span class="hljs-built_in">max</span>; <span class="hljs-comment">// &amp;可以省略</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>对于指针来说一般指向的是栈（局部变量），通过new和malloc的方式能指向堆（<strong>这里开辟的空间不是指针变量，而是指针变量所指向的地方</strong>）。（我的理解可能是由于栈空间不够了，需要注意的是指向堆的指针，不要改变其指向的地址，不然开辟的堆无法释放，所以<strong>定义拷贝构造函数时要加const</strong>）</p>
+</li>
+<li><p>浅拷贝和深拷贝，（1）浅拷贝就是两个对象同时指向同一个位置  （2）深拷贝就是两个对象存储的值一致但是两个位置。</p>
+</li>
+<li><p>拷贝构造函数，是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。<strong>一般类中会自带拷贝构造函数，但这是浅拷贝</strong>。如果类带有<strong>指针变量</strong>，并有<strong>动态内存分配</strong>，则它必须有一个拷贝构造函数。 暂时不理解条件为什么要加动态内存分配，我的理解是为了<strong>深拷贝</strong>，所以要自己重新写拷贝构造函数。</p>
+</li>
+<li><p>拷贝赋值函数，就不是在构造的时候赋值。由于一开始存储数据的空间不一定一样，所以一开始要先删除   所指向的空间然后创建一个，再拷贝。注意在删除之前要进行<strong>自我赋值检测</strong>。</p>
+</li>
+<li><p>**弹性结构体，成员变量写成a[]**，其实就是个指针。但是这个指针所指向的空间会自动分配为结构体变量的下一个。</p>
+<p>（1）空数组指长度为0的数组，仅可在类或者结构体中声明。</p>
+<p>定义空数组的好处有：</p>
+<ol>
+<li><p>不占用空间，如果是指针的话还需要4字节空间，而空数组不占用任何空间</p>
+</li>
+<li><p>无需初始化，数组名直接就是所在的偏移，如果是指针则需要给指针赋值</p>
+<p>通常用来申请buff空间的写法是：</p>
+<p>malloc(sizeof(strTest) + bufflen);</p>
+<p>这样即可一次给结构体和缓冲区分配内存，减少使用和维护成本.。</p>
+</li>
+</ol>
+</li>
+<li><p>string和string.h是两个东西，一个c++一个是c，cstring对应string.h。</p>
+</li>
+<li><p>句柄handle，是一个void类型指针貌似。（待更新）</p>
+</li>
+<li><p>智能指针，指向动态空间，可以自动释放空间。（待更新）（需要特殊方式定义）</p>
+</li>
+<li><p>（1）函数重载：函数名相同，变量列表必须不相同。</p>
+<p>（2）函数重写：（函数名和函数参数列表必须完全一样）<strong>父类虚函数</strong>，不一定在子类重写，<strong>重写之后调用父类方法依旧是子类方法</strong>。<strong>父类纯虚函数</strong>,子类一定要重写。在C++中子类对象调用父类函数可通过<strong>域操作符(::)</strong></p>
+<p>（3）函数重定义：函数名相同，变量列表可以不相同，子类对象时候调子类方法，父类对象时调父类方法。</p>
+</li>
+<li><p>模板类的实现和定义应该尽量都放在头文件中实现。</p>
+</li>
+<li><p>类的组合在该类中用其他类的对象。</p>
+</li>
+<li><p>函数也有地址，函数名代表函数地址。对于 fun 和 &amp;fun 应该这样理解：</p>
+<p><strong>他们两值完全一样。</strong></p>
+<p>(1). fun 是函数的首地址，它的类型是 void ()<br>(2). &amp;fun 表示一个指向函数 fun 这个对象的地址， 它的类型是 void (*)()<br>因此 fun 和 &amp;fun 所代表的地址值是一样的，但类型不一样。fun 是一个函数<br><strong>&amp;fun 表达式的值是一个指针！</strong></p>
+</li>
+<li><p>c++提供了关键字<strong>explicit</strong>,阻止了隐式构造。</p>
+</li>
+<li><p>const成员函数，该函数可以被 const 对象调用，并且不能修改类中的任何成员变量。</p>
+<p>operator有2种用法，第一个是重载操作运算符，一种是隐式类型转换。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>NULL在c++种宏定义为0，函数重载时难以判断到底是int 0还是 (void*) 0.</p>
+</li>
+<li><p>RAII，全称为Resource Acquisition Is Initialization，汉语是“资源获取即初始化”。就是资源获取的时候将其封装在某类的object中。利用”栈资源会在相应object的生命周期结束时自动销毁”来自动释放资源，即，构造函数创建时初始化获取资源，并将资源释放写在析构函数中。所以这个RAII其实就是和智能指针的实现是类似的。（核心思想：<strong>将资源和类对象绑定，用构造申请，析构释放</strong>）</p>
+<p>（1） <strong><code>lock_guard</code></strong> 和**<code>unique_lock</code>**都是这一思想，在创造对象的时候lock()，对象销毁的时候unlock()。给互斥量上锁，以为着只有当前线程能进对资源进行操作。</p>
+<p>（2）**<code>unique_lock</code>**还能和条件变量一起使用，实现线程同步通信，同时也能手动解锁。</p>
+</li>
+<li><p>条件变量（<strong>为了实现线程同步通信</strong>）的几个关键点：</p>
+<p>（1）wait()函数的内部实现是：先释放了互斥量的锁，然后阻塞（已经unlock）以等待条件为真；</p>
+<p>（2）notify系列函数需在unlock之后再被调用；（不一定）</p>
+<p>（3）套路是：  </p>
+<p>​    			a. A线程拿住锁，然后wait,此时已经释放锁，只是阻塞了在等待条件为真；<br>            b. B线程拿住锁，做一些业务处理，然后令条件为真，释放锁，再调用notify函数；<br>​    			c. A线程被唤醒，接着运行。</p>
+</li>
+<li><p><img src="/../../../images/image-20230410155416133.png" srcset="/img/loading.gif" lazyload alt="image-20230410155416133"></p>
+</li>
+<li></li>
+</ol>
 
                 
               </div>
@@ -295,6 +377,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/c/" class="category-chain-item">c++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/c/syntax/" class="category-chain-item">syntax</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -305,8 +415,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2023/03/23/hello-world/</div>
+      <div>c++_syntax</div>
+      <div>http://example.com/2023/04/17/c++学习/c++语法及特性/c++语法/</div>
     </div>
     <div class="license-meta">
       
@@ -318,7 +428,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月23日</div>
+          <div>2023年4月17日</div>
         </div>
       
       
@@ -350,15 +460,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="音视频播放器基础知识">
+                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++_class/" title="c++_class">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">音视频播放器基础知识</span>
+                        <span class="hidden-mobile">c++_class</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="网络编程">
+                        <span class="hidden-mobile">网络编程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

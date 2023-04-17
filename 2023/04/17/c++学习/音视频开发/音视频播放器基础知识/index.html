@@ -18,21 +18,23 @@
   <meta name="author" content="Oath">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="数据来源（本地，http）会抽象成一个buffer数据缓存接口，解复用的时候不用管数据类型，只有moov在前面才不是本地。  我们做播放器的时候都是选择以音频为基准去做同步。  IBP,I是当前帧，B是前后帧，P是预测帧。 GOP中gop cache-&gt;直播秒开（保证拉流端，一上来就能拉到I帧），如果拉到p帧，因为p帧要借鉴前面帧，会出现马赛克，这时候解码效果不好。 webrtc I帧间隔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2023/03/23/hello-world/index.html">
+<meta property="og:title" content="音视频播放器基础知识">
+<meta property="og:url" content="http://example.com/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="菜鸡技术学习历程">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="数据来源（本地，http）会抽象成一个buffer数据缓存接口，解复用的时候不用管数据类型，只有moov在前面才不是本地。  我们做播放器的时候都是选择以音频为基准去做同步。  IBP,I是当前帧，B是前后帧，P是预测帧。 GOP中gop cache-&gt;直播秒开（保证拉流端，一上来就能拉到I帧），如果拉到p帧，因为p帧要借鉴前面帧，会出现马赛克，这时候解码效果不好。 webrtc I帧间隔">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-23T06:55:13.823Z">
-<meta property="article:modified_time" content="2023-03-23T06:55:13.823Z">
+<meta property="og:image" content="http://example.com/images%5Cimage-20230405133157870.png">
+<meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-17T07:46:28.320Z">
 <meta property="article:author" content="Oath">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/images%5Cimage-20230405133157870.png">
   
   
   
-  <title>Hello World - 菜鸡技术学习历程</title>
+  <title>音视频播放器基础知识 - 菜鸡技术学习历程</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="音视频播放器基础知识"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-23 14:55" pubdate>
-          2023年3月23日 下午
+        <time datetime="2023-04-17 00:00" pubdate>
+          2023年4月17日 凌晨
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          367 字
+          242 字
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -270,24 +272,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">音视频播放器基础知识</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <ol>
+<li><p>数据来源（本地，http）会抽象成一个buffer数据缓存接口，解复用的时候不用管数据类型，只有moov在前面才不是本地。</p>
+</li>
+<li><p>我们做播放器的时候都是选择以<strong>音频</strong>为基准去做同步。</p>
+</li>
+<li><p>IBP,I是当前帧，B是前后帧，P是预测帧。 GOP中gop cache-&gt;直播秒开（保证拉流端，一上来就能拉到I帧），如果拉到p帧，因为p帧要借鉴前面帧，会出现马赛克，这时候解码效果不好。</p>
+<p>webrtc I帧间隔较大，有新加进来，可以请求发送。</p>
+<p><img src="/../../../images%5Cimage-20230405133157870.png" srcset="/img/loading.gif" lazyload alt="image-20230405133157870"></p>
+</li>
+<li><p>通过量化（DCT）可以使得较大数据变小，使码率变小，变化越大复原越难。</p>
+</li>
+</ol>
 
                 
               </div>
@@ -295,6 +296,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/c/" class="category-chain-item">c++</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/c/audio-video/" class="category-chain-item">audio/video</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -305,8 +334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2023/03/23/hello-world/</div>
+      <div>音视频播放器基础知识</div>
+      <div>http://example.com/2023/04/17/c++学习/音视频开发/音视频播放器基础知识/</div>
     </div>
     <div class="license-meta">
       
@@ -318,7 +347,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月23日</div>
+          <div>2023年4月17日</div>
         </div>
       
       
@@ -350,15 +379,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="音视频播放器基础知识">
+                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/ffplay%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="ffplay源码分析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">音视频播放器基础知识</span>
+                        <span class="hidden-mobile">ffplay源码分析</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/03/23/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>

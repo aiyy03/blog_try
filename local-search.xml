@@ -4,6 +4,153 @@
   
   
   <entry>
+    <title>数据结构</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/STL/c++%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/STL/c++%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    
+    <content type="html"><![CDATA[<p>在树的深度优先遍历中（包括前序、中序、后序遍历），递归方法最为直观易懂，但考虑到效率，我们通常不推荐使用递归。</p><p>都是当前左子树，右子树。<strong>前序</strong>：根左右。<strong>后序</strong>：左右根。<strong>中序</strong>：左根右。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>STL</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>STL函数用法</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/STL/stl/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/STL/stl/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>sort()函数，默认的是对二维数组按照第一列的大小对每行的数组进行排序。所以可以加上cmp函数用按照任意列对数组进行排序</p></li><li><pre><code class="c++">set&lt;pair&lt;int, int&gt;&gt; booked; booked.lower_bound(&#123;end, 0&#125;)</code></pre><p>使用<code>lower_bound</code>函数(二分法 )找到第一个元素，其<code>pair&lt;int, int&gt;</code>类型的键大于或等于<code>&#123;end, 0&#125;</code>。</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>STL</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++_class</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++_class/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++_class/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>拷贝构造函数</p></li><li><pre><code class="hljs">//在c中typedef struct Student&#123;int a;&#125;Stu;Stu stu1typedef struct Student&#123;int a;&#125;struct Student stu;//在c++中struct Student&#123;int a;&#125;;Student stu2;</code></pre></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>syntax</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>c++_syntax</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++%E8%AF%AD%E6%B3%95/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++%E8%AF%AD%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>数组 array.size()</p></li><li><p>&amp;有2种用法：1.取值2.引用，对于引用这个用法就是同一个地址取不同的变量名字（叫不同的名字），改变引用变量，原变量也随之改变。</p><p>*也有两种用途：1.声明2.间接引用</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> &amp;i = j;#引用<br><span class="hljs-type">int</span> i = &amp;j;#取值<br><span class="hljs-type">int</span> *i = &amp;j;#声明指针<br>*i = j;#间接引用，根据地址索引变量。<br></code></pre></td></tr></table></figure></li><li><p>函数传递变量三种，<strong>值传递，地址传递，引用传递</strong>。</p></li><li><p><strong>Extern关键字不能放在函数里面，要放在全局变量的位置</strong>。确定变量可以使用其他cpp文件声明的变量，extern可以置于变量或者函数前，以表示变量或者函数的定义在别的文件中，可以这么理解，<em>extern</em> 是用来在另一个文件中声明一个全局变量或函数。<strong>另外，extern也可用来进行链接指定。 有点类似python中的import可以自动寻找同一工程下面同名函数。</strong>一个变量被使用，要被定义(定义的同时声明了)，extern声明并不分配空间。 </p></li><li><p>指针和引用的区别：（1）指针不用初始化值，引用声明的时候需要指定绑定的变量。</p><p>右值引用： int &amp;&amp;a &#x3D; 1；目的是为了优化空间（减少复制次数，增加临时变量存活周期）</p><p>常量左值引用：const int &amp;a &#x3D; 1；（缺点只能是常量）</p></li><li><p>类型别名：auto不知道返回值类型，自动声明。</p></li><li><p>不要在头文件中使用using，std是一个标准的作用域。</p></li><li><p>在c++中一般就用string 去表示字符串，等价于char *。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;abc&quot;</span><span class="hljs-meta">#str放的是<span class="hljs-string">&quot;abc&quot;</span>的首位置，*str = <span class="hljs-string">&quot;a&quot;</span></span><br></code></pre></td></tr></table></figure></li><li><p>函数重载，<strong>相同的函数名</strong>。</p><p>(1)函数名称必须相同。 </p><p>(2)参数列表必须不同（个数不同、类型不同、参数排列顺序不同等）。</p><p>(3)函数的返回类型可以相同也可以不相同。 </p><p>(4)仅仅返回类型不同不足以成为函数的重载。</p></li><li><p>函数指针可以实现函数的回调，做的事情就是：在一个函数中，不改变其他执行语句，通过函数指针指向不同的函数，从而执行不同的函数。（当然也可以通过输入字符串匹配进行选择，感觉不够高效）</p><p><a href="https://blog.csdn.net/qq_41475825/article/details/105966064">(16条消息) 回调函数和普通调用函数_大龙哥。的博客-CSDN博客_回调函数和直接调用函数</a></p><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs glsl"><span class="hljs-type">int</span> (* p)(<span class="hljs-type">int</span>, <span class="hljs-type">int</span>) = &amp; <span class="hljs-built_in">max</span>; <span class="hljs-comment">// &amp;可以省略</span><br></code></pre></td></tr></table></figure></li><li><p>对于指针来说一般指向的是栈（局部变量），通过new和malloc的方式能指向堆（<strong>这里开辟的空间不是指针变量，而是指针变量所指向的地方</strong>）。（我的理解可能是由于栈空间不够了，需要注意的是指向堆的指针，不要改变其指向的地址，不然开辟的堆无法释放，所以<strong>定义拷贝构造函数时要加const</strong>）</p></li><li><p>浅拷贝和深拷贝，（1）浅拷贝就是两个对象同时指向同一个位置  （2）深拷贝就是两个对象存储的值一致但是两个位置。</p></li><li><p>拷贝构造函数，是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。<strong>一般类中会自带拷贝构造函数，但这是浅拷贝</strong>。如果类带有<strong>指针变量</strong>，并有<strong>动态内存分配</strong>，则它必须有一个拷贝构造函数。 暂时不理解条件为什么要加动态内存分配，我的理解是为了<strong>深拷贝</strong>，所以要自己重新写拷贝构造函数。</p></li><li><p>拷贝赋值函数，就不是在构造的时候赋值。由于一开始存储数据的空间不一定一样，所以一开始要先删除   所指向的空间然后创建一个，再拷贝。注意在删除之前要进行<strong>自我赋值检测</strong>。</p></li><li><p>**弹性结构体，成员变量写成a[]**，其实就是个指针。但是这个指针所指向的空间会自动分配为结构体变量的下一个。</p><p>（1）空数组指长度为0的数组，仅可在类或者结构体中声明。</p><p>定义空数组的好处有：</p><ol><li><p>不占用空间，如果是指针的话还需要4字节空间，而空数组不占用任何空间</p></li><li><p>无需初始化，数组名直接就是所在的偏移，如果是指针则需要给指针赋值</p><p>通常用来申请buff空间的写法是：</p><p>malloc(sizeof(strTest) + bufflen);</p><p>这样即可一次给结构体和缓冲区分配内存，减少使用和维护成本.。</p></li></ol></li><li><p>string和string.h是两个东西，一个c++一个是c，cstring对应string.h。</p></li><li><p>句柄handle，是一个void类型指针貌似。（待更新）</p></li><li><p>智能指针，指向动态空间，可以自动释放空间。（待更新）（需要特殊方式定义）</p></li><li><p>（1）函数重载：函数名相同，变量列表必须不相同。</p><p>（2）函数重写：（函数名和函数参数列表必须完全一样）<strong>父类虚函数</strong>，不一定在子类重写，<strong>重写之后调用父类方法依旧是子类方法</strong>。<strong>父类纯虚函数</strong>,子类一定要重写。在C++中子类对象调用父类函数可通过<strong>域操作符(::)</strong></p><p>（3）函数重定义：函数名相同，变量列表可以不相同，子类对象时候调子类方法，父类对象时调父类方法。</p></li><li><p>模板类的实现和定义应该尽量都放在头文件中实现。</p></li><li><p>类的组合在该类中用其他类的对象。</p></li><li><p>函数也有地址，函数名代表函数地址。对于 fun 和 &amp;fun 应该这样理解：</p><p><strong>他们两值完全一样。</strong></p><p>(1). fun 是函数的首地址，它的类型是 void ()<br>(2). &amp;fun 表示一个指向函数 fun 这个对象的地址， 它的类型是 void (*)()<br>因此 fun 和 &amp;fun 所代表的地址值是一样的，但类型不一样。fun 是一个函数<br><strong>&amp;fun 表达式的值是一个指针！</strong></p></li><li><p>c++提供了关键字<strong>explicit</strong>,阻止了隐式构造。</p></li><li><p>const成员函数，该函数可以被 const 对象调用，并且不能修改类中的任何成员变量。</p><p>operator有2种用法，第一个是重载操作运算符，一种是隐式类型转换。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> <span class="hljs-type">const</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure></li><li><p>NULL在c++种宏定义为0，函数重载时难以判断到底是int 0还是 (void*) 0.</p></li><li><p>RAII，全称为Resource Acquisition Is Initialization，汉语是“资源获取即初始化”。就是资源获取的时候将其封装在某类的object中。利用”栈资源会在相应object的生命周期结束时自动销毁”来自动释放资源，即，构造函数创建时初始化获取资源，并将资源释放写在析构函数中。所以这个RAII其实就是和智能指针的实现是类似的。（核心思想：<strong>将资源和类对象绑定，用构造申请，析构释放</strong>）</p><p>（1） <strong><code>lock_guard</code></strong> 和**<code>unique_lock</code>**都是这一思想，在创造对象的时候lock()，对象销毁的时候unlock()。给互斥量上锁，以为着只有当前线程能进对资源进行操作。</p><p>（2）**<code>unique_lock</code>**还能和条件变量一起使用，实现线程同步通信，同时也能手动解锁。</p></li><li><p>条件变量（<strong>为了实现线程同步通信</strong>）的几个关键点：</p><p>（1）wait()函数的内部实现是：先释放了互斥量的锁，然后阻塞（已经unlock）以等待条件为真；</p><p>（2）notify系列函数需在unlock之后再被调用；（不一定）</p><p>（3）套路是：  </p><p>​    a. A线程拿住锁，然后wait,此时已经释放锁，只是阻塞了在等待条件为真；<br>            b. B线程拿住锁，做一些业务处理，然后令条件为真，释放锁，再调用notify函数；<br>​    c. A线程被唤醒，接着运行。</p></li><li><p><img src="/../../../images/image-20230410155416133.png" alt="image-20230410155416133"></p></li><li></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>syntax</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>网络编程</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>数据流：</p></li><li><p>数据报：</p></li><li><p>服务端搭建：</p><p>（1）<strong>网络通信初始化</strong> WSAStartup();</p><p>（2）<strong>创建服务端套接字</strong> socket(套接字类型，数据流，协议);</p><p>（3）<strong>设置套接字类型</strong> 端口可复用（可省略） setsocket();</p><p>（4）<strong>配置服务器端的网络地址</strong>  struct sockaddr_in server_addr;这个变量包括服务器地址和端口号。</p><p>（5）<strong>将套接字和server_addr进行绑定</strong> bind();</p><p>（6）<strong>动态给server_addr分配端口号</strong>，端口号初始化如果为0的话，进行getsockname()动态分配。</p><p>（7）<strong>创建监听队列</strong>，为接受客户端地址做准备。</p><p>客户端请求：</p><p>（1）根据服务端套接字和客户端地址，<strong>为客户端分配套接字</strong></p><p>​</p></li></ol><p></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>net</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ffplay源码分析</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/ffplay%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/ffplay%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p><img src="/../../../images%5Cimage-20230413155724148.png" alt="image-20230413155724148"></p><p>这是一个结构体初始化，“.”表示结构体成员的访问符号，其中URL开头的都是函数指针，这样虽然看似是声明了一个全局的结构体变量，依然能根据不同的参数（上下文）打开不同的音频文件。</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>audio/video</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>音视频播放器基础知识</title>
+    <link href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <url>/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<ol><li><p>数据来源（本地，http）会抽象成一个buffer数据缓存接口，解复用的时候不用管数据类型，只有moov在前面才不是本地。</p></li><li><p>我们做播放器的时候都是选择以<strong>音频</strong>为基准去做同步。</p></li><li><p>IBP,I是当前帧，B是前后帧，P是预测帧。 GOP中gop cache-&gt;直播秒开（保证拉流端，一上来就能拉到I帧），如果拉到p帧，因为p帧要借鉴前面帧，会出现马赛克，这时候解码效果不好。</p><p>webrtc I帧间隔较大，有新加进来，可以请求发送。</p><p><img src="/../../../images%5Cimage-20230405133157870.png" alt="image-20230405133157870"></p></li><li><p>通过量化（DCT）可以使得较大数据变小，使码率变小，变化越大复原越难。</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>c++</category>
+      
+      <category>audio/video</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2023/03/23/hello-world/"/>
     <url>/2023/03/23/hello-world/</url>
