@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images%5Cimage-20230405133157870.png">
 <meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-04-17T07:46:28.320Z">
+<meta property="article:modified_time" content="2023-05-08T03:51:35.591Z">
 <meta property="article:author" content="Oath">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images%5Cimage-20230405133157870.png">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          242 字
+          2.2k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 分钟
+          19 分钟
         
       </span>
     
@@ -288,6 +288,55 @@
 </li>
 <li><p>通过量化（DCT）可以使得较大数据变小，使码率变小，变化越大复原越难。</p>
 </li>
+<li><p>位深就是改变颜色通道的范围，原本0-256。</p>
+</li>
+<li><p>RTMP协议基于TCP来实现不支持H5，带宽问题。RTP和RTCP基于UDP来实现。</p>
+</li>
+<li><p>HLS协议基于HTTP短连接来实现，集合一段时间数据，生成ts切片文件，然后更新m3u8(HTTP Live Streaming直播的索引文件)，一般延迟会大于10s。HLS是以点播的技术方式来实现直播。由于数据通过HTTP协议传输，所以完全不用考虑防火墙或者代理的问题，而且分段文件的时长很短，客户端可以很快的选择和切换码率，以适应不同带宽条件下的播放。不过HLS的这种技术特点，决定了它的延迟一般总是会高于普通的流媒体直播协议。</p>
+</li>
+<li><p>源代码中videocapturer基类可以设置想要的编码分辨率根据这个分辨率去采集，然后在子类中videoAdapter根据想要的编码分辨率计算出裁剪比例，将采集到不符合编码分辨率进行处理以满足。</p>
+</li>
+<li><p>webRTC默认使用VP8进行解码的，解除WebRTC对FFmpeg的依赖，接下来就是生成h264decoder涉及汇编优化，然后生成适配类，接着修改SDP协商与解码顺序把h264解码代码写在前面。</p>
+<p>在default_args里面添加<br>  rtc_use_h264 &#x3D; true<br>  ffmpeg_branding &#x3D; “Chrome”</p>
+</li>
+<li><p>这个其实很简单，每当有人加入的时候就和已经在的用户（用哈希表）发送offer信令，然后等待建立peerconnection。</p>
+</li>
+<li><p>getDisplayMedia()这个api就能实现屏幕共享。</p>
+</li>
+<li><p>http必须客户端像服务端请求，不具备服务器推送的能力。</p>
+</li>
+<li><p>原本ip地址先通过证书配置成支持ssl安全通信的https地址（使得不再用本地地址host主机地址作为客户端访问），但是https不能访问ws，所以我们又通过nginx在中间进行代理用wss代理ws（添加了新的端口）</p>
+</li>
+<li><p>设置了一个abort当完成队列操作唤醒所有等待线程，是他们安全退出。通过abort支持阻塞唤醒。</p>
+</li>
+<li><p>使用<code>av_hwframe_map</code>代替<code>av_hwframe_transfer_data</code>的好处是可以减少内存拷贝操作，提高处理效率，特别是在需要处理大量视频数据时，可以更好地利用硬件加速的优势。同时，由于不需要拷贝数据，所以也可以减少内存的占用和分配次数。</p>
+</li>
+<li><p>音视频同步是指在播放过程中保持音频和视频的同步，让它们看起来像是在同时播放一样。在使用 FFmpeg 进行音视频播放的过程中，可以使用时钟（clock）来实现音视频同步。</p>
+<p>具体来说，可以使用一个时钟来跟踪音频和视频的播放时间。音频播放需要采用硬件设备，因此可以通过查询设备的缓冲区来获取已经播放的音频样本数，然后将其转换为时间戳。对于视频播放，可以使用解码器返回的帧时间戳。这两个时间戳可以用来计算音视频的时间差。</p>
+<p>在计算时间差之后，可以使用一个缓冲区来暂存音视频帧，直到它们的时间戳相等。当时间戳相等时，可以将它们合并并一起播放。</p>
+<p>在实际应用中，还需要考虑音视频帧的延迟和丢帧的情况，以及如何应对这些情况对音视频同步的影响。</p>
+</li>
+<li><p>支持自适应窗口缩放这个如何实现的？</p>
+<p>可以通过OpenGL中的glutReshapeFunc函数来注册窗口大小变化的回调函数，每当窗口大小变化时，该函数会被自动调用，可以在该函数中完成重新计算缩放比例等操作。</p>
+</li>
+<li><p>QOpenGLWidget是基于QWidget实现的OpenGL渲染窗口，它继承自QWidget，可以将其放在普通的QWidget容器中使用。</p>
+</li>
+<li><p>widget布局中添加了视频播放线程Qlist（实现视频的读取解码渲染工作），为什么实现Qlist是因为要同时渲染多个视频播放。</p>
+</li>
+<li><p>这段代码是用来初始化硬件解码器的。在函数中，首先获取指定编解码器codec所支持的硬件配置config，如果没有找到支持的硬件配置，则直接返回。如果找到支持的硬件配置，则判断是否是设备类型，并且是否是支持的硬件解码器。如果是，则打开指定类型的设备，并为其创建AVHWDeviceContext。然后，将硬件上下文绑定到解码器的上下文中，并设置像素格式get_format，以便让解码器知道使用哪种格式输出帧。最后，函数返回。步骤先通过ffmpeg硬解码接口获取硬解码config，本地判断是否满足，然后将对应类型填入硬解码上下文中，再将这个上下文绑定到解码器上下文中去，并指定输出像素格式。</p>
+</li>
+<li><p>将解码后的视频帧传输到openGL纹理中，glTexImage2D函数将YUV数据转换为RGB数据，并将其存储到纹理中。</p>
+</li>
+<li><p>弱网优化的策略包括如下：</p>
+<ul>
+<li>播放器Buffer</li>
+<li>丢帧策略 (优先丢P帧，其次I帧，最后音频)</li>
+<li>自适应码率算法</li>
+<li>双向链路优化</li>
+<li>音频FEC冗余算法(20%丢包率）</li>
+</ul>
+</li>
+<li></li>
 </ol>
 
                 

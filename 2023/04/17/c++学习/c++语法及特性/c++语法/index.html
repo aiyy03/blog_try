@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/image-20230410155416133.png">
 <meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-04-17T07:45:47.245Z">
+<meta property="article:modified_time" content="2023-05-21T11:17:17.505Z">
 <meta property="article:author" content="Oath">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/images/image-20230410155416133.png">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          4.1k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          24 分钟
+          35 分钟
         
       </span>
     
@@ -296,7 +296,7 @@
 </li>
 <li><p>不要在头文件中使用using，std是一个标准的作用域。</p>
 </li>
-<li><p>在c++中一般就用string 去表示字符串，等价于char *。</p>
+<li><p>在c++中一般就用string 去表示字符串，等价于char *，char *如果通过常量字符串定义是不可写的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> *str = <span class="hljs-string">&quot;abc&quot;</span><span class="hljs-meta">#str放的是<span class="hljs-string">&quot;abc&quot;</span>的首位置，*str = <span class="hljs-string">&quot;a&quot;</span></span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>函数重载，<strong>相同的函数名</strong>。</p>
@@ -314,6 +314,7 @@
 <li><p>浅拷贝和深拷贝，（1）浅拷贝就是两个对象同时指向同一个位置  （2）深拷贝就是两个对象存储的值一致但是两个位置。</p>
 </li>
 <li><p>拷贝构造函数，是一种特殊的构造函数，它在创建对象时，是使用同一类中之前创建的对象来初始化新创建的对象。<strong>一般类中会自带拷贝构造函数，但这是浅拷贝</strong>。如果类带有<strong>指针变量</strong>，并有<strong>动态内存分配</strong>，则它必须有一个拷贝构造函数。 暂时不理解条件为什么要加动态内存分配，我的理解是为了<strong>深拷贝</strong>，所以要自己重新写拷贝构造函数。</p>
+<p>（成员变量存在指针的时候会出问题）反正都是传递的是const，不用改变为什么要引用传递？这是因为函数值传递的时候会用到复制的过程（即将当前变量赋值到临时变量调用调用拷贝构造，陷入递归调用）</p>
 </li>
 <li><p>拷贝赋值函数，就不是在构造的时候赋值。由于一开始存储数据的空间不一定一样，所以一开始要先删除   所指向的空间然后创建一个，再拷贝。注意在删除之前要进行<strong>自我赋值检测</strong>。</p>
 </li>
@@ -334,7 +335,7 @@
 </li>
 <li><p>句柄handle，是一个void类型指针貌似。（待更新）</p>
 </li>
-<li><p>智能指针，指向动态空间，可以自动释放空间。（待更新）（需要特殊方式定义）</p>
+<li><p>智能指针，指向动态空间，可以自动释放空间。（待更新）（需要特殊方式定义）RAII的思想。一共有三种：Unique（一个指针对应一个对象），shared（多个指针对应一个对象，最后一个指针超出 作用域）（线程不安全：引用计数），weak（避免循环引用）</p>
 </li>
 <li><p>（1）函数重载：函数名相同，变量列表必须不相同。</p>
 <p>（2）函数重写：（函数名和函数参数列表必须完全一样）<strong>父类虚函数</strong>，不一定在子类重写，<strong>重写之后调用父类方法依旧是子类方法</strong>。<strong>父类纯虚函数</strong>,子类一定要重写。在C++中子类对象调用父类函数可通过<strong>域操作符(::)</strong></p>
@@ -366,9 +367,37 @@
 <p>（3）套路是：  </p>
 <p>​    			a. A线程拿住锁，然后wait,此时已经释放锁，只是阻塞了在等待条件为真；<br>            b. B线程拿住锁，做一些业务处理，然后令条件为真，释放锁，再调用notify函数；<br>​    			c. A线程被唤醒，接着运行。</p>
 </li>
-<li><p><img src="/../../../images/image-20230410155416133.png" srcset="/img/loading.gif" lazyload alt="image-20230410155416133"></p>
+<li><p>位运算：<img src="/../../../images/image-20230410155416133.png" srcset="/img/loading.gif" lazyload alt="image-20230410155416133"></p>
 </li>
-<li></li>
+<li><p><strong>尽量指针传递的时候用引用传递</strong>。如果说只是改变指针所指向地方的值，传递指针是没有问题的。然而有可能接收的指针是空指针，难免要指向其他地方。</p>
+</li>
+<li><p>注意，数组名虽然是指针，但是不能如下操作，因为该函数返回类型为void。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">ret.<span class="hljs-built_in">push_back</span>(temp_vec1.<span class="hljs-built_in">push_back</span>(que.<span class="hljs-built_in">front</span>()-&gt;val));<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>需要注意的是数组名是指针，而vector是对象。</p>
+</li>
+<li><p>静态函数不能访问非静态成员变量。<strong>因为静态函数中没有this指针</strong>。</p>
+</li>
+<li><p>sizeof是运算符。</p>
+</li>
+<li><p>抽象基类，必须有一个纯虚函数。不能实例化对象，必须被子类重写。</p>
+</li>
+<li><p>C++通过虚函数表，<strong>实现了虚函数与对象（即父类指针指向哪个子类，就用哪个子类的虚函数表中对应的虚函数）的动态绑定</strong>。每个对象会初始化的过程中，定义一个虚函数表指针，指向虚函数表。虚函数表中含有该类所用有的虚函数的（虚函数指针）。（需要注意通常情况，子类重写了父类虚函数，没有显式添加 <code>virtual</code> 关键字，也会自动成为虚函数） 实际上，基类指针指向子类指针，会发生向上转型，这个子类对象会，转为基类指针。</p>
+</li>
+<li><p>数组名为什么从0开始，因为a[i] &#x3D; base + i*sizeof()，可以减少一次减一操作。</p>
+</li>
+<li><p>c++内存分区：代码区，全局&#x2F;静态存储区，栈区，堆区和常量区。</p>
+</li>
+<li><p>语法不同：malloc&#x2F;free是一个C语言的函数，而new&#x2F;delete是C++的运算符。</p>
+<p>分配内存的方式不同：malloc只分配内存，而new会分配内存并且调用对象的构造函数来初始化对象。</p>
+<p>返回值不同：malloc返回一个 void 指针，需要自己强制类型转换，而new返回一个指向对象类型的指针。<br>malloc 需要传入需要分配的大小，而 new 编译器会自动计算所构造对象的大小</p>
+</li>
+<li><p>public继承：当子类以public继承时，其父类中的访问权限全都不变的继承到子类；</p>
+<p>protected继承：当子类以protected继承时，其父类中的public被继承为protected；</p>
+<p>private继承：当子类以private继承时，其父类中的public和protected都被继承为private。</p>
+</li>
+<li><p>移动语义的用处：定义一个移动构造函数，如果需要拷贝右值，则为了避免深拷贝，开辟多余空间，只需要把右值空间给予需要拷贝的变量就行（右值往往只需要浅拷贝）。注意：<strong>需要注意的是，拷贝构造函数必须要用const &amp;常量引用的原因就是为了保证能深拷贝右值，而不只是左值</strong>。</p>
+</li>
 </ol>
 
                 

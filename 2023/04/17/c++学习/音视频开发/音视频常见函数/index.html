@@ -18,21 +18,21 @@
   <meta name="author" content="Oath">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据流：tcp 数据报：udp 服务端搭建：（服务器端口号就是他所监听的端口号） （1）网络通信初始化 WSAStartup(); （2）创建服务端套接字 socket(套接字类型，数据流，协议); （3）设置套接字类型 端口可复用（可省略） setsocket(); （4）配置服务器端的网络地址  struct sockaddr_in server_addr;这个变量包括服务器地址和端口号。 （">
+    <meta name="description" content="1.avformat_open_input 是 FFmpeg 中的一个函数，用于打开一个输入文件并创建一个 AVFormatContext 结构体，该结构体包含了输入文件的格式和元数据等信息，可以被后续的解码操作所使用。 函数原型如下： 1int avformat_open_input(AVFormatContext **ps, const char *url, AVInputFormat *fm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络编程">
-<meta property="og:url" content="http://example.com/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:title" content="音视频常见函数">
+<meta property="og:url" content="http://example.com/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%B8%B8%E8%A7%81%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="菜鸡技术学习历程">
-<meta property="og:description" content="数据流：tcp 数据报：udp 服务端搭建：（服务器端口号就是他所监听的端口号） （1）网络通信初始化 WSAStartup(); （2）创建服务端套接字 socket(套接字类型，数据流，协议); （3）设置套接字类型 端口可复用（可省略） setsocket(); （4）配置服务器端的网络地址  struct sockaddr_in server_addr;这个变量包括服务器地址和端口号。 （">
+<meta property="og:description" content="1.avformat_open_input 是 FFmpeg 中的一个函数，用于打开一个输入文件并创建一个 AVFormatContext 结构体，该结构体包含了输入文件的格式和元数据等信息，可以被后续的解码操作所使用。 函数原型如下： 1int avformat_open_input(AVFormatContext **ps, const char *url, AVInputFormat *fm">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-05-07T13:48:39.902Z">
+<meta property="article:modified_time" content="2023-04-19T14:16:48.864Z">
 <meta property="article:author" content="Oath">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>网络编程 - 菜鸡技术学习历程</title>
+  <title>音视频常见函数 - 菜鸡技术学习历程</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="网络编程"></span>
+            <span id="subtitle" data-typed-text="音视频常见函数"></span>
           
         </div>
 
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2.7k 字
         
       </span>
     
@@ -232,7 +232,7 @@
         
         
         
-          16 分钟
+          23 分钟
         
       </span>
     
@@ -270,57 +270,47 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">网络编程</h1>
+            <h1 style="display: none">音视频常见函数</h1>
             
             
               <div class="markdown-body">
                 
-                <p>数据流：tcp</p>
-<p>数据报：udp</p>
-<p>服务端搭建：（服务器端口号就是他所监听的端口号）</p>
-<p>（1）<strong>网络通信初始化</strong> WSAStartup();</p>
-<p>（2）<strong>创建服务端套接字</strong> socket(套接字类型，数据流，协议);</p>
-<p>（3）<strong>设置套接字类型</strong> 端口可复用（可省略） setsocket();</p>
-<p>（4）<strong>配置服务器端的网络地址</strong>  struct sockaddr_in server_addr;这个变量包括服务器地址和端口号。</p>
-<p>（5）<strong>将套接字和server_addr进行绑定</strong> bind();</p>
-<p>（6）<strong>动态给server_addr分配端口号</strong>，端口号初始化如果为0的话，进行getsockname()动态分配。</p>
-<p>（7）<strong>创建监听队列</strong>，为接受客户端地址做准备。</p>
-<p>客户端请求：</p>
-<p>（1）根据服务端套接字和客户端地址，<strong>为客户端分配套接字</strong></p>
-<ol>
-<li><p>三次握手：后面两次是为了确认，在服务端确认客户端能接受到服务端发送的数据。</p>
-</li>
-<li><p>四次挥手：第一次客户端向服务器，通过FIN报文告诉他客户端数据传输完了，你服务器传完了就可以关了。进入FIN-WAIT-1状态。第二次服务器给客户端发送，告诉他我知道了，但是等我我发送完，客户端进入2状态，服务器进入close_wait状态。第三次，服务器发完了所有告诉客户端，你可以关闭了，等着client最后的ACK信息，如果说接到的信息不对，会持续给客户端发送，所以进入的是last_ack状态。第四次，客户端发向服务端，进入2msl等待状态，防止第三次信息没法送出去，就提前终止。</p>
-</li>
-<li><p>TCP和udp区别：（1）面向连接（2）一个数据流一个数据报（3）tcp提供流量控制和拥塞控制 （4）udp支持一对多</p>
-</li>
-<li><p>浏览器输入URL后执行的全部过程。</p>
-<p>（1）首先是域名解析，客户端使用DNS协议将URL解析为对应的IP地址；<br>（2）然后建立TCP连接，客户端与服务器通过三次握手建立TCP连接；<br>（3）接着是http连接，客户端向服务器发送http连接请求； （http连接无需额外连接，直接通过已经建立的TCP连接发送）<br>（4）服务器对客户端发来的http请求进行处理，并返回响应；<br>（5）客户端接收到http响应，将结果渲染展示给用户。</p>
-</li>
-<li><p>TCP怎么保证可靠性的（校序重流拥）</p>
-<p>（1）校验和<br>发送的数据包的二进制相加然后取反，目的是检测数据在传输过程中的任何变化。如果收到段的检验和有差错，TCP将丢弃这个报文段和不确认收到此报文段。</p>
-<p>（2）确认应答+序列号<br>TCP给发送的每一个包进行编号，接收方对数据包进行排序，把有序数据传送给应用层。</p>
-<p>（3）超时重传<br>当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。</p>
-<p>（4）流量控制<br>TCP连接的每一方都有固定大小的缓冲空间，TCP的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP使用的流量控制协议是可变大小的滑动窗口协议。<br>接收方有即时窗口（滑动窗口），随ACK报文发送</p>
-<p>（5）拥塞控制（慢启动，拥塞避免，快速重传和快速恢复）<br>当网络拥塞时，减少数据的发送。<br>发送方有拥塞窗口，发送数据前比对接收方发过来的即使窗口，取小</p>
-</li>
-<li><p>http&#x2F;1.0和http&#x2F;1.1的区别</p>
-<p>1.1默认常连接，不用重新建立TCP连接，减少了反复建立TCP连接的的消耗和延迟.</p>
-</li>
-<li><p>http请求方法有哪些，get和post的区别。</p>
-<p>http的请求包括get,post,put,delete。四种方法（只有post不是操作幂等性的）。</p>
-<p>（1）get方法不会修改服务器上的资源，它的查询是没有副作用的，而post有可能会修改服务器上的资源<br>（2）get可以保存为书签，可以用缓存来优化，而post不可以<br>（3）get把请求附在url上，而post把参数附在http包的包体中<br>（4）浏览器和服务器一般对get方法所提交的url长度有限制，一般是1k或者2k，而对post方法所传输的参数大小限制为80k到4M不等<br>（5）post可以传输二进制编码的信息，get的参数一般只支持ASCII</p>
-</li>
-<li><p>cookie和session的区别？</p>
-<p>（1）作用范围不同，cookie保存在客户端，session保存在服务器端</p>
-<p>（2）cookie一般作用时间长一点，类比自动登录功能。</p>
-<p>（3）cookie由于在客户端，隐私保护没有那么好，容易被窃取。</p>
-<p>（4）cookie存储大小一般小一点。</p>
-</li>
-<li><p>redis：不是关系型数据库，支持更复杂的数据结构。 key-value 模型。单线程，纯内存操作，避免了上下文切换的开销，非阻塞的多路复用I&#x2F;O机制。</p>
-</li>
-</ol>
-<p>​	</p>
+                <p><strong>1.</strong><code>avformat_open_input</code> 是 FFmpeg 中的一个函数，用于打开一个输入文件并创建一个 <code>AVFormatContext</code> 结构体，该结构体包含了输入文件的格式和元数据等信息，可以被后续的解码操作所使用。</p>
+<p>函数原型如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">avformat_open_input</span><span class="hljs-params">(AVFormatContext **ps, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *url, AVInputFormat *fmt, AVDictionary **options)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>函数参数说明：</p>
+<ul>
+<li><code>ps</code>: 指向指针的指针，用于存储创建的 <code>AVFormatContext</code> 结构体的地址。</li>
+<li><code>url</code>: 输入文件的 URL。</li>
+<li><code>fmt</code>: 输入文件的格式，如果为 NULL，则自动检测输入文件的格式。</li>
+<li><code>options</code>: 一些额外的选项，可以为 NULL。</li>
+</ul>
+<p>该函数返回值为 0 表示成功，其他值表示失败。如果返回值为非零，可以使用 <code>av_strerror</code> 函数将错误码转换为错误信息。调用该函数成功后，应该在结束使用 <code>AVFormatContext</code> 结构体后，调用 <code>avformat_close_input</code> 函数来释放资源。</p>
+<p><strong>2.</strong><code>avformat_find_stream_info</code>是FFmpeg多媒体框架中的一个函数，用于读取和解码给定输入文件中的多媒体数据，并初始化文件中包含的每个流的相关结构。</p>
+<p><strong>3.</strong><code>av_dump_format</code>是FFmpeg多媒体框架中的一个函数，用于将给定的AVFormatContext中的多媒体信息打印到标准输出。</p>
+<p><strong>4.</strong><code>av_find_best_stream</code>是FFmpeg多媒体框架中的一个函数，用于在输入文件中查找最佳的流以进行解码。例如：指定解码视频流，则找到最适合的视频流进行解码。</p>
+<p><strong>5.</strong><code>avcodec_parameters_to_context</code> 是 FFmpeg 中的一个函数，用于将音视频编码参数（<code>AVCodecParameters</code>）拷贝到编码器上下文（<code>AVCodecContext</code>）中。</p>
+<p>**6.**avcodec_open2()中的AVCodecContext，已经通过avcodec_parameters_to_context()复制了数据，为什么还需要进行初始化?</p>
+<p>​	<code>	avcodec_open2()</code>函数的作用是打开给定的解码器，初始化它的AVCodecContext结构体，以便后续可以解码音频或视频数据。虽然在调用		<code>				avcodec_parameters_to_context()</code>函数之后，AVCodecContext结构体中已经有了一些数据，但是这些数据仅仅是从AVCodecParameters结构体中复制过来的，还不足以满足解码器的初始化要求。例如，一些必要的结构体指针可能还未初始化，某些编解码器需要特定的选项等等。			</p>
+<p>​	因此，在调用	<code>   		avcodec_parameters_to_context()</code>函数之后，还需要通过<code>avcodec_open2()</code>函数对AVCodecContext进行初始化，以便解码器能够正常工作。在该函数内部，还会检查一些参数的合法性，并进行解码器所需的一些结构体初始化。如果不调用<code>avcodec_open2()</code>函数，AVCodecContext中的结构体指针将为空，解码器无法工作。</p>
+<p><strong>7</strong>.avcodec_receive_frame(codec_ctx_, frame);这段代码中，对数据包解码了下次运行还会对原来数据包解码吗?</p>
+<p>​	不会。当调用<code>avcodec_receive_frame()</code>函数成功获取到一个完整的解码帧时，该解码帧所对应的数据包已经被解码完毕并且从解码器中移除了。因此，下次调用<code>avcodec_receive_frame()</code>时，解码器将会解码下一个数据包，而不是之前已经解码过的数据包。如果解码器缓冲区中没有任何数据包等待解码，<code>avcodec_receive_frame()</code>函数会返回<code>AVERROR(EAGAIN)</code>，告诉你需要等待更多数据包到达解码器缓冲区。</p>
+<p>**8.**这是一个函数声明的前缀，用于指定函数的可见性和调用约定。</p>
+<p>在SDL库中，函数声明通常使用以下格式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">extern</span> DECLSPEC return_type SDLCALL <span class="hljs-title">function_name</span><span class="hljs-params">(arguments)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>其中，<code>DECLSPEC</code>和<code>SDLCALL</code>是前缀宏，它们分别指定函数的可见性和调用约定。具体来说：</p>
+<ul>
+<li><code>DECLSPEC</code>指定函数的可见性，这取决于平台和编译器的不同。在Windows平台下，<code>DECLSPEC</code>被定义为<code>__declspec(dllexport)</code>或<code>__declspec(dllimport)</code>，用于指定函数是在DLL中导出还是导入。在其他平台下，<code>DECLSPEC</code>可能为空。</li>
+<li><code>SDLCALL</code>指定函数的调用约定，即函数在被调用时应该如何处理参数、返回值和堆栈等。不同平台和编译器可能使用不同的函数调用约定，因此需要使用不同的<code>SDLCALL</code>宏定义来适配。在SDL库中，<code>SDLCALL</code>通常被定义为<code>__cdecl</code>或<code>_System</code>，具体取决于平台和编译器的不同。</li>
+</ul>
+<p>这些前缀的作用是确保函数在不同平台和编译器下都能正确地编译和链接，并且在被调用时可以正确地处理参数和返回值，避免出现不可预期的错误。</p>
+<p>**9.**wanted_spec.userdata &#x3D; this;</p>
+<p>在代码<code>wanted_spec.userdata = this;</code>中，<code>this</code>指针代表当前对象的指针，这行代码的作用就是将当前对象的指针赋值给<code>wanted_spec</code>结构体中的<code>userdata</code>字段，以便在音频回调函数中可以使用该指针访问和操作当前对象。<strong>相当于该结构体中的成员变量，存储了一个指向当前对象的指针。</strong></p>
+<p>**10.**abort的作用</p>
+<p>​	根据您提供的代码，这是一个模板类 <code>my_Queue</code>，实现了一个基本的线程安全队列。其中 <code>Abort()</code> 方法设置了一个标志位 <code>abort_</code>，并通过条件变量 <code>cond_</code> 唤醒所有等待的线程，以通知它们队列已经无效。 <code>Push()</code> 方法向队列中添加元素，如果队列已经无效，则返回错误码 <code>-1</code>，否则加锁，将元素压入队列，并通过条件变量 <code>cond_</code> 唤醒一个等待的线程。 <code>Pop()</code> 方法从队列中弹出一个元素，如果队列已经无效，则返回错误码 <code>-1</code>，如果队列为空，则返回错误码 <code>-2</code>，否则等待元素可用，并在超时时唤醒线程。 <code>Front()</code> 方法和 <code>Pop()</code> 方法类似，但不会从队列中弹出元素，而是直接返回队列头部元素的值。<code>Size()</code> 方法返回队列当前的元素数量。</p>
+<p>​	此代码的作用是提供一个线程安全的队列，以便多线程环境下的数据交换和共享。通过使用互斥锁和条件变量来保证队列的线程安全性。同时，通过 <code>Abort()</code> 方法，可以随时中断队列的操作，以便安全退出线程。</p>
 
                 
               </div>
@@ -344,7 +334,7 @@
   
     <span>></span>
     
-  <a href="/categories/c/net/" class="category-chain-item">net</a>
+  <a href="/categories/c/audio-video/" class="category-chain-item">audio/video</a>
   
   
 
@@ -366,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>网络编程</div>
-      <div>http://example.com/2023/04/17/c++学习/网络编程/网络编程/</div>
+      <div>音视频常见函数</div>
+      <div>http://example.com/2023/04/17/c++学习/音视频开发/音视频常见函数/</div>
     </div>
     <div class="license-meta">
       
@@ -411,9 +401,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/c++%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%89%B9%E6%80%A7/c++%E8%AF%AD%E6%B3%95/" title="c++_syntax">
+                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/ijkplayer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="ijkplayer源码分析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">c++_syntax</span>
+                        <span class="hidden-mobile">ijkplayer源码分析</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -421,8 +411,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/17/c++%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%BC%80%E5%8F%91/ijkplayer%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="ijkplayer源码分析">
-                        <span class="hidden-mobile">ijkplayer源码分析</span>
+                      <a href="/2023/03/23/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
